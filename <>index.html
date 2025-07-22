@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>DevPort | Portfolio</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -15,6 +16,7 @@
         <li><a href="#projects" class="nav-link">Projects</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
+       <button class="nav-toggle" aria-label="Open Menu">&#9776;</button>
       </nav>
   </header>
   
@@ -33,6 +35,7 @@
         I'm a beginner frontend developer learning to build beautiful, functional web apps with HTML and CSS. I enjoy solving problems and creating visually appealing layouts.
       </p>
     </section>
+   
    <section id="projects" class="section projects-section">
       <h2>Projects</h2>
       <div class="projects-grid">
@@ -44,8 +47,12 @@
           <h3>Project Two</h3>
           <p>A portfolio website template for developers, showcasing projects and skills.</p>
         </div>
-       </div>
-    </section>
+       <div class="project-card">
+          <h3>Project Three</h3>
+          <p>A contact form layout with validation and mobile-first design principles.</p>
+        </div>
+      </div> 
+     </section>
    
    <section id="contact" class="section contact-section">
       <h2>Contact</h2>
@@ -61,6 +68,28 @@
    <footer>
     <p>&copy; 2025 DevPort. Designed by rimdwivedi.</p>
   </footer>
+
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    navToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('nav-menu-active');
+    });
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+        navMenu.classList.remove('nav-menu-active');
+      });
+    });
+  </script>
+</body>
+</html>
 
 
    
