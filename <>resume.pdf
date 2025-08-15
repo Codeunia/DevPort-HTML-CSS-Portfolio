@@ -1,5 +1,6 @@
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
+
 def draw_wrapped_text(c, text, x, y, max_width, font_name="Helvetica", font_size=11, leading=14):
     c.setFont(font_name, font_size)
     words = text.split()
@@ -16,14 +17,30 @@ def draw_wrapped_text(c, text, x, y, max_width, font_name="Helvetica", font_size
         c.drawString(x, y, line)
         y -= leading
     return y
+
 pdf_path = "rimjhim_dwivedi_resume_spaced.pdf"
 c = canvas.Canvas(pdf_path, pagesize=A4)
 width, height = A4
+
 c.setFont("Helvetica-Bold", 22)
 c.drawString(72, height - 50, "Rimjhim Dwivedi")
+
 c.setFont("Helvetica", 12)
 c.drawString(72, height - 75, "Email: rimdwivedi17@email.com | Mobile: +91-8840813658 | GitHub: github.com/rimdwivedi")
 c.drawString(72, height - 93, "LinkedIn: linkedin.com/in/rimdwivedi")
+
+y = height - 130
+c.setFont("Helvetica-Bold", 16)
+c.drawString(72, y, "Professional Summary")
+
+summary_text = (
+    "Result-oriented and passionate web developer with a strong foundation in HTML, CSS, and responsive design. "
+    "Adept at creating user-friendly, visually appealing websites. Enthusiastic about continuous learning and "
+    "collaborating with others to solve real-world problems using web technologies."
+)
+y -= 20
+y = draw_wrapped_text(c, summary_text, 72, y, width - 144)
+
 c.setFont("Helvetica-Bold", 16)
 c.drawString(72, y - 10, "Skills")
 skills = [
@@ -36,6 +53,7 @@ skills = [
 y -= 30
 for skill in skills:
     y = draw_wrapped_text(c, skill, 72, y, width - 144)
+
 c.setFont("Helvetica-Bold", 16)
 c.drawString(72, y - 10, "Projects")
 y -= 30
@@ -52,16 +70,19 @@ projects = [
         "- Created an accessible and stylish contact form with validation using pure HTML/CSS."
     ])
 ]
+
 for title, descs in projects:
     c.setFont("Helvetica-Bold", 12)
     y = draw_wrapped_text(c, title, 72, y, width - 144, "Helvetica-Bold", 12)
     for d in descs:
         y = draw_wrapped_text(c, d, 72, y, width - 144)
+
 c.setFont("Helvetica-Bold", 16)
 c.drawString(72, y - 10, "Education")
 y -= 30
 y = draw_wrapped_text(c, "Bachelor of Technology in Computer Science in Artificial Intelligence and Machine Learning", 72, y, width - 144, "Helvetica-Bold", 12)
 y = draw_wrapped_text(c, "JSS Acadmy of Technical Education, Noida, India | 2023 - 2026", 72, y, width - 144)
+
 c.setFont("Helvetica-Bold", 16)
 c.drawString(72, y - 10, "Certifications")
 certs = [
@@ -81,8 +102,10 @@ activities = [
 y -= 30
 for act in activities:
     y = draw_wrapped_text(c, act, 72, y, width - 144)
+
 c.showPage()
 c.save()
+
 print(f"PDF generated: {pdf_path}")
 
 
