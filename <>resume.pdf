@@ -1,1 +1,18 @@
-This is a placeholder for your resume PDF file. You can replace this file with your actual resume.
+from reportlab.lib.pagesizes import A4
+from reportlab.pdfgen import canvas
+def draw_wrapped_text(c, text, x, y, max_width, font_name="Helvetica", font_size=11, leading=14):
+    c.setFont(font_name, font_size)
+    words = text.split()
+    line = ""
+    for word in words:
+        test_line = f"{line} {word}".strip()
+        if c.stringWidth(test_line, font_name, font_size) <= max_width:
+            line = test_line
+        else:
+            c.drawString(x, y, line)
+            y -= leading
+            line = word
+    if line:
+        c.drawString(x, y, line)
+        y -= leading
+    return y
